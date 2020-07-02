@@ -10,11 +10,11 @@
       one tenant at a use multiple subscriptions
 ## how to create user in azure ad:
    ### authentication:
-       * [clickhere](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory)
+  [clickhere](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory)
        * log into account
             eg: login into azure account
    ### authorization:
-       * [clickhere](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
+   [clickhere](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
            do something
            eg: create vm in azure
        * Note: we need to assign permission to user based role
@@ -47,7 +47,7 @@
 ## how to setup windows active directory: 
      * deploy vm with 2 cpu and 4 GB RAM 
      * Login into windows VM 
-     * [follow documention](http://pc-addicts.com/setup-active-directory-server-2016/) 
+[follow documention](http://pc-addicts.com/setup-active-directory-server-2016/) 
 
 
 
