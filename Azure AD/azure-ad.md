@@ -11,22 +11,22 @@
 ## how to create user in azure ad:
    ### authentication:
   [clickhere](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory)
-       * log into account
-            eg: login into azure account
+  * log into account
+  * eg: login into azure account
    ### authorization:
    [clickhere](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
-           do something
-           eg: create vm in azure
-       * Note: we need to assign permission to user based role
-       *   "right access to right person"
-           RBAC
-        eg: create user and assign vm owner
+   * do something
+   * eg: create vm in azure
+   * Note: we need to assign permission to user based role
+   *   "right access to right person"
+          
+   * eg: create user and assign vm owner
 ## Azure Built in roles:
    ### Azure AD roles:
          Global admin : he manitain azure ad and remote ad == fedaration 
          user admin: he maintain azure ad only
-                       * create user and assign roles
-                       * delete user
+         * create user and assign roles
+         * delete user
          billing admin: maintain only subscriptions
          
    ### Azure Resource Roles:
