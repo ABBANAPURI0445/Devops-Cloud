@@ -10,9 +10,9 @@
       one tenant at a use multiple subscriptions
 ## how to create user in azure ad:
    ### authentication:
-  [clickhere](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory)
-  * log into account
-  * eg: login into azure account
+    * [clickhere](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory)
+    * log into account
+    * eg: login into azure account
    ### authorization:
    [clickhere](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
    * do something
