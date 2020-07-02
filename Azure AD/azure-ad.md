@@ -8,21 +8,21 @@
          and assign permissions
       at a time one subscription have one tenant 
       one tenant at a use multiple subscriptions
-  * how to create user in azure ad:
-      * authentication:
+  ## how to create user in azure ad:
+      ### authentication:
        * [clickhere](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory)
-           log into account
+       * log into account
             eg: login into azure account
-      * authorization:
+      ### authorization:
        * [clickhere](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
            do something
            eg: create vm in azure
-        Note: we need to assign permission to user based role
-           "right access to right person"
+       * Note: we need to assign permission to user based role
+       *   "right access to right person"
            RBAC
-     eg: create user and assign vm owner
+        eg: create user and assign vm owner
     # Azure Built in roles:
-      # Azure AD roles:
+      ## Azure AD roles:
          Global admin : he manitain azure ad and remote ad == fedaration 
          user admin: he maintain azure ad only
                        * create user and assign roles
