@@ -1,4 +1,4 @@
-## Azure Active Directory:
+### Azure Active Directory:
   * what is azure ad:
     its user management of azure
     its much more mature than aws IAM
@@ -8,8 +8,8 @@
          and assign permissions
       at a time one subscription have one tenant 
       one tenant at a use multiple subscriptions
-  ## how to create user in azure ad:
-      ### authentication:
+  ### how to create user in azure ad:
+      ## authentication:
        * [clickhere](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory)
        * log into account
             eg: login into azure account
