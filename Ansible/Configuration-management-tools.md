@@ -17,15 +17,15 @@
         sudo apt-add-repository --yes --update ppa:ansible/ansible
         sudo apt install ansible
      ----
-  Steps: follow these steps in master and nodes
-     1 create user \
+  Steps: follow these steps in master and nodes \
+     1 create user 
      
-      adduser username \
+      adduser username 
       eg: adduser ansible
       
-     2 add sudo previlage to user \
+     2 add sudo previlage to user 
       
-      visudo \
+      visudo 
       ansible ALL=(ALL:ALL) ALL
      
      3 enable password based authentication
