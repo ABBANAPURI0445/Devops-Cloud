@@ -1,0 +1,25 @@
+- hosts: all
+  become: yes
+  tasks:
+  - name: install apache2 
+    package:
+      name: "{{ web_package }}"
+      state: present
+    tags:
+      - webserver
+  - name: install multiple packges
+    apt:
+     name: 
+          - git
+          - tree
+          - wget
+          - htop
+     state: present
+    tags:
+      - packages  
+  - name: create file
+    file:
+      path: /home/ansible/new.txt
+      state: touch
+    tags:
+      - file

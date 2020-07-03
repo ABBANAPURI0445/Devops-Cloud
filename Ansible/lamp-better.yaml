@@ -1,0 +1,58 @@
+--- 
+- hosts: all 
+  become: yes 
+  tasks: 
+  - name: install apache2 on ubuntu 
+    apt: 
+      name: apache2
+      state: present 
+      update_cache: yes 
+    when: ansible_os_family == "Debian"
+  - name: install httpd on centos 
+    yum: 
+      name: httpd
+      state: present 
+    when:  ansible_os_family == "RedHat"
+  - name: restart apache2 on ubuntu
+    service:
+       name: apache2
+       state: restarted 
+    when: ansible_os_family == "Debian"
+  - name: restart httpd on centos 
+    service: 
+      name: httpd
+      state: restarted 
+    when: ansible_os_family == "RedHat"
+  - name: install php packages on ubuntu
+    apt: 
+     name: "{{ item }}"
+     state: present
+    loop:
+      - php
+      - libapache2-mod-php
+      - php-mcrypt
+      - php-mysql
+    when: ansible_os_family == "Debian"
+  - name: install php packages on centos
+    yum:
+     name: "{{ item }}"
+     state: present 
+    loop:
+     - php
+     - php-mysql
+    when: ansible_os_family == "RedHat" 
+  - name: restart apache2 on ubuntu
+    service:
+       name: apache2
+       state: restarted 
+    when: ansible_os_family == "Debian"
+  - name: restart httpd on centos 
+    service: 
+      name: httpd
+      state: restarted 
+    when: ansible_os_family == "RedHat"
+  - name:  copy content into nodes
+    copy:
+     content: '<?php phpinfo(); ?>'
+     dest: /var/www/html/info.php
+    

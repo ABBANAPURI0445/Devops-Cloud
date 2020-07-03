@@ -1,0 +1,72 @@
+- hosts: all
+  become: yes
+  tasks:
+  - name: install java8 on ubuntu
+    apt:
+     name: openjdk-8-jdk
+     state: present
+     update_cache: yes
+    ignore_errors: yes
+  - name: create tomcat group
+    group:
+      name: tomcat
+      state: present
+  - name: create diectory
+    file:
+      path: /opt/tomcat
+      state: directory
+  - name: crete user 
+    user:
+      name: tomcat
+      shell: /bin/false
+      group: tomcat
+      home: /opt/tomcat
+
+  - name: install tomcat (unarchive module)
+    unarchive:
+      src: https://downloads.apache.org/tomcat/tomcat-8/v8.5.54/bin/apache-tomcat-8.5.54.tar.gz
+      dest: /opt/tomcat
+      remote_src: yes
+      extra_opts:
+      - --strip-components=1
+  - name: update pemissions
+    shell: |
+     chgrp -R tomcat /opt/tomcat
+     chmod -R g+r /opt/tomcat/conf
+     chmod g+x /opt/tomcat/conf
+     chown -R tomcat /opt/tomcat/webapps/ /opt/tomcat/work/ /opt/tomcat/temp/  /opt/tomcat/logs/
+  - name: copy service file
+    copy:
+     src: /home/ansible/service
+     dest: /etc/systemd/system/tomcat.service
+  - name: deamon reload
+    systemd:
+     daemon_reload: yes
+  - name: start tomcat
+    systemd:
+     state: started
+     name: tomcat
+  - name: systemctl enable tomcat
+    systemd:
+      name: tomcat
+      enabled: yes
+  - name: user file
+    template: 
+      src: /home/ansible/user.xml.j2
+      dest: /opt/tomcat/conf/tomcat-users.xml
+  - name: acces for  Manager app
+    copy: 
+      src: /home/ansible/accessmanager
+      dest: /opt/tomcat/webapps/manager/META-INF/context.xml
+  - name: Host Manager app
+    copy: 
+      src: /home/ansible/accessmanager
+      dest: /opt/tomcat/webapps/host-manager/META-INF/context.xml
+  - name: restarted tomcat
+    systemd:
+     state: restarted
+     name: tomcat
+  - name: deploy application
+    get_url:
+     url: https://jar-war.s3.amazonaws.com/gameoflife.war
+     dest: /opt/tomcat/webapps 

@@ -1,0 +1,29 @@
+- hosts: all
+  become: yes
+  tasks:
+  - name: install apache2 on ubuntu
+    apt:
+      name: apache2
+      state: present
+      update_cache: yes
+  - name: restart apache2 on ubuntu
+    service:
+     name: apache2
+     state: restarted
+  - name: install php package 
+    apt: 
+     name: "{{ item }}"
+     state: present
+    loop:
+    - php
+    - libapache2-mod-php
+    - php-mcrypt
+    - php-mysql
+  - name: restart apache2 on ubuntu
+    service:
+     name: apache2
+     state: restarted
+  - name:  copy content into nodes
+    copy:
+     content: '<?php phpinfo(); ?>'
+     dest: /var/www/html/info.php
