@@ -1,0 +1,16 @@
+- hosts: localhost
+  become: yes 
+  tasks:
+  - name: install tomcat8
+    apt: 
+      name: tomcat8 
+      state: present 
+      update_cache: yes 
+  - name: deploy application
+    get_url:
+     url: https://jar-war.s3.amazonaws.com/gameoflife.war
+     dest: /var/lib/tomcat8/webapps 
+  - name: restart tomcat8 
+    service: 
+      name: tomcat8 
+      state: restarted 
