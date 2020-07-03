@@ -6,13 +6,13 @@ Ansible-Roles:
    * install role
       ansible-galaxy install geerlingguy.java
    * write a playbook:
-  ---
+  ```
    - hosts: servers \
      become: yes \
      roles: 
         - geerlingguy.java
         - zaxos.tomcat-ansible-role
-  ---
+  ```
       
 
 * how to write resuable playbook
