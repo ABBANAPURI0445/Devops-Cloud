@@ -17,7 +17,7 @@
         sudo apt-add-repository --yes --update ppa:ansible/ansible
         sudo apt install ansible
      ----
-  Steps: follow these steps in master and nodes \
+  Steps: follow these steps in master and nodes 
      
      1. create user 
       adduser username 
