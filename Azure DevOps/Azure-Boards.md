@@ -17,7 +17,7 @@
        1 basic\
        2 agile\
        3 Scrum\
-       4 CMMI \
+       4 CMMI 
      * based on azure boards will get workitems
      if you choose basic
         workitems:
