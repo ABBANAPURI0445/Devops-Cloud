@@ -7,9 +7,9 @@ Ansible-Roles:
       ansible-galaxy install geerlingguy.java
    * write a playbook:
   ---
-   - hosts: servers
-     become: yes
-     roles: 
+   - hosts: servers \
+     become: yes \
+     roles: \
         - geerlingguy.java
         - zaxos.tomcat-ansible-role
   ---
