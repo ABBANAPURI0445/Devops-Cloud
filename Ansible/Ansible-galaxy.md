@@ -1,4 +1,4 @@
-Ansible-Roles: 
+## Ansible-Roles: 
 * how to use someone else playbook:
    ansible-galaxy
 
@@ -7,8 +7,8 @@ Ansible-Roles:
       ansible-galaxy install geerlingguy.java
    * write a playbook:
   ```
-   - hosts: servers \
-     become: yes \
+   - hosts: servers 
+     become: yes 
      roles: 
         - geerlingguy.java
         - zaxos.tomcat-ansible-role
