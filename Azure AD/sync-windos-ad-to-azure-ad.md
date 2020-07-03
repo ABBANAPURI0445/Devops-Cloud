@@ -1,13 +1,13 @@
 # Sync On-premisis users to azure active directory
 ## Lab Setup:
   ### setup On-Premisis:
-    - deploy Windows server 2016
+    1. deploy Windows server 2016
 ![imageID](./windows-vm.jpg)
-    - login EC2 machine
-    - install active directory
-[Click Here](http://pc-addicts.com/setup-active-directory-server-2016/)
-    - create users in Windows AD
-[Click Here](https://activedirectorypro.com/how-to-create-a-new-active-directory-user-account/)
+    2. login EC2 machine
+    3. install active directory
+[install Windows AD Click Here](http://pc-addicts.com/setup-active-directory-server-2016/)
+    4. create users in Windows AD
+[create user in Windows AD](https://activedirectorypro.com/how-to-create-a-new-active-directory-user-account/)
      
  ### Azure Cloud AD Setup:
     1. create tenant 
