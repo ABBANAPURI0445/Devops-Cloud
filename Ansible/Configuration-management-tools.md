@@ -18,21 +18,21 @@
         sudo apt install ansible
      ----
   Steps: follow these steps in master and nodes
-     1 create user
-      --
-      adduser username
+     1 create user \
+      ---
+      adduser username \
       eg 
-      adduser ansible
-      ----
-     2 add sudo previlage to user
+      adduser ansible 
       ---
-      visudo 
+     2 add sudo previlage to user \
+      ---
+      visudo \
 
-      ansible ALL=(ALL:ALL) ALL
-      ----
-     3 enable password based authentication
+      ansible ALL=(ALL:ALL) ALL \
       ---
-      vi /etc/ssh/sshd_config
+     3 enable password based authentication \
+      ---
+      vi /etc/ssh/sshd_config \
       ---
        * aws provide by default keypair authentication
        * we need to enable password based authentication
@@ -41,9 +41,9 @@
      ---
      4 restart sshd 
      ---
-     systemctl restart sshd
+     systemctl restart sshd \
      or 
-     service sshd restart
+     service sshd restart \
      ---
 
 Note: in nodes no need to ansible software
@@ -72,8 +72,8 @@ Note: in nodes no need to ansible software
  ---
  vi /etc/ansible/hosts
  ---
- 34.217.176.66
- 34.217.12.157
+ 34.217.176.66 \
+ 34.217.12.157 \
  34.211.159.125 
 
 
