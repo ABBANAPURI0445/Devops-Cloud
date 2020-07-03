@@ -1,0 +1,10 @@
+apiVersion: v1  ## group/version ex core/v1 --v1
+kind: Pod       ## object
+metadata:
+  name: pod-app   ## Pod name
+  labels:
+    app: tomcat
+spec:    ## inputs -- > containers , image name
+  containers:
+   - name: app-container
+     image: tomcat:8
