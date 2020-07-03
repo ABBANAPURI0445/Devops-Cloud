@@ -55,13 +55,10 @@ Note: in nodes no need to ansible software
 * establish communication between master to node via ssh:
    steps:
     1. generate ssh keys
-       Note: login into ansible user (master) [su ansible]
+       Note: login into ansible user (master) [su ansible] \
       __ssh-keygen__
-
-    2. copy the ssh keys from master to node
-     
+    2. copy the ssh keys from master to node \
       __ssh-copy-id usernamenode@nodeip/dns__
-      
       eg: ssh-copy-id ansible@172.31.31.228
 
 
