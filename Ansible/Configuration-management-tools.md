@@ -58,7 +58,7 @@ Note: in nodes no need to ansible software
        Note: login into ansible user (master) [su ansible] \
       __ssh-keygen__
     2. copy the ssh keys from master to node \
-      __ssh-copy-id usernamenode@nodeip/dns__
+      __ssh-copy-id usernamenode@nodeip/dns__ \
       eg: ssh-copy-id ansible@172.31.31.228
 
 
