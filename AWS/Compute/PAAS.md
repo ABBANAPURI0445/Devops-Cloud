@@ -1,12 +1,14 @@
 * Elastic Beanstack:
+  ```
     * how to deploy application
         * Create Machine
         * install require software 
         * Deploy application
         * Autoscaling
         * Loadbalncer
-    
+  ```  
 * ECS (ELastic Container service)
+  ```
    * Docker:
      * Write customize dockerfile
      * Build image
@@ -15,9 +17,10 @@
           * everything maintained by aws
           * autoscaling and LB maintained by aws
 
-
+```
 
 * Compute
+ ```
    EC2  , userdata
     console cli CF
    image
@@ -31,4 +34,4 @@
     Elastic beanstack
     ECS
     ECR 
- 
+ ```
