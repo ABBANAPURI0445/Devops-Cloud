@@ -13,11 +13,11 @@
     development team will work on managing thier works item
       bugs , user stories , epic ,issues ,tasks 
   * types of azure boards:
-      4 types 
-       1 basic
-       2 agile
-       3 Scrum
-       4 CMMI 
+      4 types\ 
+       1 basic\
+       2 agile\
+       3 Scrum\
+       4 CMMI \
      * based on azure boards will get workitems
      if you choose basic
         workitems:
