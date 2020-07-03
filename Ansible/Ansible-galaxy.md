@@ -8,9 +8,8 @@ Ansible-Roles:
    * write a playbook:
   ---
    - hosts: servers
-      become: yes
-     roles:
-      - role: 
+     become: yes
+     roles: 
         - geerlingguy.java
         - zaxos.tomcat-ansible-role
   ---
