@@ -10,10 +10,13 @@
 [create user in Windows AD](https://activedirectorypro.com/how-to-create-a-new-active-directory-user-account/)
      
  ### Azure Cloud AD Setup:
-    1. create tenant 
+    1. create tenant and Switch tenant
+        * goto azure active directory 
+        * create tenant and switch tenant
+  ![Preview](./tenant.jpg)
     2. create user 
       * assign Global admin role 
-      * login into  azure portal and reset password # 
+      * login into  azure portal and reset password
 
 ## sync between On-premisis to Azure AD using Azure AD Connect
    * install azure ad connect on On-premisis
