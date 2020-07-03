@@ -8,6 +8,9 @@
          and assign permissions
       at a time one subscription have one tenant 
       one tenant at a use multiple subscriptions
+   ### Subscription:
+      * one subscription link to one tenant
+      * one tenant associate to Multiple Subscriptions
 ## how to create user in azure ad:
    ### authentication:
     * [clickhere](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory)
