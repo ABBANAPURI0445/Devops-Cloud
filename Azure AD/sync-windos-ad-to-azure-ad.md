@@ -4,9 +4,9 @@
     1. deploy Windows server 2016
 ![imageID](./windows-vm.jpg)
     2. login EC2 machine
-    3. install active directory  
+    3. install active directory . 
 [Click Here](http://pc-addicts.com/setup-active-directory-server-2016/)
-    4. create users in Windows AD
+    4. create users in Windows AD.
 [Click Here](https://activedirectorypro.com/how-to-create-a-new-active-directory-user-account/)
      
  ### Azure Cloud AD Setup:
