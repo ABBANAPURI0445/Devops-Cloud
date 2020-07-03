@@ -18,17 +18,17 @@
         sudo apt install ansible
      ----
   Steps: follow these steps in master and nodes \
-     1 create user 
      
+     1. create user 
       adduser username 
       eg: adduser ansible
       
-     2 add sudo previlage to user 
+     2. add sudo previlage to user 
       
       visudo 
       ansible ALL=(ALL:ALL) ALL
      
-     3 enable password based authentication
+     3. enable password based authentication
     
       vi /etc/ssh/sshd_config
      
@@ -37,7 +37,7 @@
      
      PasswordAuthentication yes
    
-     4 restart sshd 
+     4. restart sshd 
     
      systemctl restart sshd
      or 
@@ -54,12 +54,12 @@ Note: in nodes no need to ansible software
 
 * establish communication between master to node via ssh:
    steps:
-     1 generate ssh keys
+    1. generate ssh keys
        Note: login into ansible user (master) [su ansible]
       ----
       ssh-keygen
       ---
-    2 copy the ssh keys from master to node
+    2. copy the ssh keys from master to node
       ---
       ssh-copy-id usernamenode@nodeip/dns
       ---
