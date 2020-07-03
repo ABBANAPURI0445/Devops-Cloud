@@ -56,20 +56,19 @@ Note: in nodes no need to ansible software
    steps:
     1. generate ssh keys
        Note: login into ansible user (master) [su ansible]
-      ----
-      ssh-keygen
-      ---
+      __ssh-keygen__
+
     2. copy the ssh keys from master to node
-      ---
-      ssh-copy-id usernamenode@nodeip/dns
-      ---
-      eg ssh-copy-id ansible@172.31.31.228
+     
+      __ssh-copy-id usernamenode@nodeip/dns__
+      
+      eg: ssh-copy-id ansible@172.31.31.228
 
 
 ### add ip address in ansible control server:
  
  vi /etc/ansible/hosts
- 
+
  34.217.176.66 \
  34.217.12.157 \
  34.211.159.125 
