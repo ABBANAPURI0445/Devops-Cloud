@@ -66,10 +66,10 @@ Note: in nodes no need to ansible software
       eg ssh-copy-id ansible@172.31.31.228
 
 
-## add ip address in ansible control server:
- ---
+### add ip address in ansible control server:
+ 
  vi /etc/ansible/hosts
- ---
+ 
  34.217.176.66 \
  34.217.12.157 \
  34.211.159.125 
