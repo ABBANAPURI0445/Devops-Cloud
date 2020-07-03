@@ -19,32 +19,30 @@
      ----
   Steps: follow these steps in master and nodes
      1 create user \
-      ---
-      adduser username
-      eg 
-      adduser ansible
-      ---
+     
+      adduser username \
+      eg: adduser ansible
+      
      2 add sudo previlage to user \
-      ---
-      visudo 
-
+      
+      visudo \
       ansible ALL=(ALL:ALL) ALL
-      ---
+     
      3 enable password based authentication
-      ---
+    
       vi /etc/ssh/sshd_config
-      ---
+     
        * aws provide by default keypair authentication
        * we need to enable password based authentication
-     ---
+     
      PasswordAuthentication yes
-     ---
+   
      4 restart sshd 
-     ---
+    
      systemctl restart sshd
      or 
      service sshd restart
-     ---
+    
 
 Note: in nodes no need to ansible software
 
