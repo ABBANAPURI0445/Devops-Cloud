@@ -3,10 +3,10 @@
   ### setup On-Premisis:
     1. deploy Windows server 2016
 ![imageID](./windows-vm.jpg)
-    2. login EC2 machine
-    3. install active directory
-[install Windows AD Click Here](http://pc-addicts.com/setup-active-directory-server-2016/)
-    4. create users in Windows AD
+    2. login EC2 machine\
+    3. install active directory\
+[install Windows AD Click Here](http://pc-addicts.com/setup-active-directory-server-2016/)\
+    4. create users in Windows AD\
 [create user in Windows AD](https://activedirectorypro.com/how-to-create-a-new-active-directory-user-account/)
      
  ### Azure Cloud AD Setup:
