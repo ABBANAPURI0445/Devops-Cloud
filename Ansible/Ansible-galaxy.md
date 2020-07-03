@@ -9,7 +9,7 @@ Ansible-Roles:
   ---
    - hosts: servers \
      become: yes \
-     roles: \
+     roles: 
         - geerlingguy.java
         - zaxos.tomcat-ansible-role
   ---
