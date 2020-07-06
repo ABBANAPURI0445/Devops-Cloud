@@ -3,18 +3,18 @@
 
 ## aws storage Service: 
   1. Block level storage: 
-    * nothing but extrenal hard disk __EBS Volumes__ 
-    * EBS volumes attach to VM
-    * EBS volumes we cant attach to Multiple VM's at a time
-    * if you want to attach to another machine same EBS volumes
-    *  first deatch exixiting machine and attach to new machine
-  2. File level storage: 
+    1. nothing but extrenal hard disk __EBS Volumes__ 
+    2. EBS volumes attach to VM
+    3. EBS volumes we cant attach to Multiple VM's at a time
+    4. if you want to attach to another machine same EBS volumes
+    5.  first deatch exixiting machine and attach to new machine
+  2. File level storage: \
     * nothing network storage __EFS__
   3. blob (binary large object) s3 __Simple Storage Service__ 
-     * in this s3 we can store mp4,mp3,documents,images  
-     * you can put restrictions on access
-        * public 
-        * private(its only for IAM user)
+     1. in this s3 we can store mp4,mp3,documents,images  
+     2. you can put restrictions on access
+        1. public 
+        2. private(its only for IAM user)
   4. Message Queue 
  ## Azure storage:
    * everything under part of storage account  
