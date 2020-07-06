@@ -24,8 +24,8 @@
        2. blob:
         we can store mp4,mp3,documents,images,logs, metrics data, backup
         you can put restrictions on access
-        1. __Public__
-        2. __Private__ (if you want to grant access for perticlur users by using __Azure Active Directory__) 
+          1. __Public__
+          2. __Private__ (if you want to grant access for perticlur users by using __Azure Active Directory__) 
                 
        3. Queue storage: 
             other Queue service: \
