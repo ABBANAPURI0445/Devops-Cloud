@@ -44,16 +44,18 @@
     lineinfile:
       path: /etc/postgresql/11/main/pg_hba.conf
       line: host   replication   replication   {{ secondary_ip }}/32   trust
-    notify:  create user and add role in database
-  - name: restart postgres cluster
-    systemd:
-     state: restarted
-     name: postgresql@11-main
-  handlers: 
+    notify: 
+    - create user and add role in database
+    - restart postgres cluster 
+  handlers:
   - name: create user and add role in database ## postgres need to add in sudoers file
     command:  psql -c "CREATE ROLE replication WITH REPLICATION PASSWORD 'password' LOGIN;"
     become: yes
     become_user: postgres
+  - name: restart postgres cluster
+    systemd:
+     state: restarted
+     name: postgresql@11-main
 
 - hosts: 172.31.6.141
   become: yes
@@ -69,10 +71,14 @@
       path: /var/lib/postgresql/11/main
       state: absent
   - name: pg backup
-    shell: sudo pg_basebackup -h 172.31.8.149 -D /var/lib/postgresql/11/main -U replication -P
-
+    shell: | 
+      sudo pg_basebackup -h {{ primary_ip }} -D /var/lib/postgresql/11/main -U replication -P
+      sudo chown -R postgres /var/lib/postgresql/11/main/
   - name: recovery.conf file 
     template: 
      src: recovery.conf.j2
      dest: /var/lib/postgresql/11/main/recovery.conf
- 
+  - name: stop standby cluster postgresql@11-main
+    systemd:
+      state: started
+      name: postgresql@11-main
