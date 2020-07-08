@@ -1,0 +1,4 @@
+standby_mode = 'on'
+primary_conninfo = '{{ primary_ip }} port=5432 user=replication password=password'
+restore_command = 'cp /var/lib/postgresql/pg_log_archive/replica1/%f %p'
+recovery_target_timeline = 'latest'

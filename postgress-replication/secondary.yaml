@@ -1,0 +1,23 @@
+- hosts: all
+  become: yes
+  vars: 
+    primary_ip: 
+    secondary_ip: 
+  tasks:
+  - name: stop standby cluster postgresql@11-main
+    systemd:
+      state: stopped
+      name: postgresql@11-main
+  - name: remove directory
+    file:
+      path: /var/lib/postgresql/11/main
+      state: absent
+    notify: pg backup
+  - name: recovery.conf file 
+    template: 
+     src: recovery.conf.j2
+     dest: var/lib/postgresql/11/main/recovery.conf
+  handlers:
+  - name: pg backup
+    command: pg_basebackup -h {{ primary_ip }} -D /var/lib/postgresql/11/main -U replication -P
+    

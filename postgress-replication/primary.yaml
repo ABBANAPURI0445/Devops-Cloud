@@ -1,0 +1,51 @@
+- hosts: localhost
+  become: yes
+  tasks:
+  - name: create directory
+    file:
+      path: /var/lib/postgresql/pg_log_archive/main
+      state: directory
+      recurse: yes
+      owner: postgres 
+  - name: wal level
+    lineinfile:
+       path: /etc/postgresql/11/main/postgresql.conf
+       regexp: 'wal_level'
+       line: 'wal_level = replica'
+  - name: set hints on 
+    lineinfile:
+       path: /etc/postgresql/11/main/postgresql.conf
+       regexp: 'wal_log_hints'
+       line: 'wal_log_hints = on' 
+  - name: archive mode on
+    lineinfile:
+       path: /etc/postgresql/11/main/postgresql.conf
+       regexp: 'archive_mode'
+       line: 'archive_mode = on'
+  - name: archive mode path
+    lineinfile:
+       path: /etc/postgresql/11/main/postgresql.conf
+       regexp: 'archive_command'
+       line: archive_command = 'test ! -f /var/lib/postgresql/pg_log_archive/main/%f && cp %p /var/lib/postgresql/pg_log_archive/main/%f'
+  - name: set wal senders
+    lineinfile:
+       path: /etc/postgresql/11/main/postgresql.conf
+       regexp: 'max_wal_senders'
+       line: 'max_wal_senders = 10'
+  - name: wal_keep_segments
+    lineinfile:
+       path: /etc/postgresql/11/main/postgresql.conf
+       regexp: 'wal_keep_segments'
+       line: 'wal_keep_segments = 64'
+  - name: pg_hba.conf 
+    lineinfile:
+      path: /etc/postgresql/11/main/pg_hba.conf
+      line: host   replication   replication   {{ secondary_ip }}   trust
+  - name: create user and add role in database ## postgres need to add in sudoers file
+    command:  psql -c "CREATE ROLE replication WITH REPLICATION PASSWORD 'password' LOGIN;"
+    become: yes
+    become_user: postgres
+  - name: restart postgres cluster
+    systemd:
+     state: restarted
+     name: postgresql@11-main
