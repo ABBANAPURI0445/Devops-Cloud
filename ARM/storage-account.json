@@ -1,0 +1,31 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageaccountname": {
+            "type": "string",
+            "defaultValue": "storageaccountfromarm"
+        },
+        "kind": {
+            "type": "string",
+            "defaultValue": "StorageV2"
+        }
+    },
+    "resources": [
+        {
+            "name": "[parameters('storageaccountname')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2019-06-01",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "[parameters('kind')]",
+            "location": "westus",
+            "properties": {
+                "accessTier": "Cool"
+            }
+        }
+
+    ]
+}
