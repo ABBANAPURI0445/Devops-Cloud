@@ -7,6 +7,7 @@
     
 
 ## Steps:
+```
    1 Create vpc
      * CIDR
    2 create IGW and attach to vpc
@@ -39,7 +40,7 @@
           * subnetA and subentB associate to Public Route table
         make two subnets (subnetC and subnet D) as Private subnet
           * subnetC and subentD associate to Private Route table
-
+```
 
 ## create two EC2 machine
  ##  one in public subnet
