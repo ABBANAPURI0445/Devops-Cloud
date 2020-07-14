@@ -56,6 +56,7 @@ aws ec2 attach-internet-gateway --internet-gateway-id igw-0628f59af12421bd6 --vp
 
 6. create vm in public subnet:
   aws ec2 run-instances --image-id ami-08f3d892de259504d --instance-type t2.micro --key-name network --security-group-ids ["sg-0dea5abd86a857f1e"] --subnet-id subnet-00921e3c56de905c7 --count 2 --associate-public-ip-address
+```
 
 
 
