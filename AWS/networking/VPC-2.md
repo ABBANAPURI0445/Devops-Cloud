@@ -1,7 +1,7 @@
 ## Route Table:
     * types of RT:
        Public Route Table:
-          Route table which route to Internet gateway == 
+          Route table which route to Internet gateway 
        Private Route Table
            Route table which not  route to Internet gateway
     
