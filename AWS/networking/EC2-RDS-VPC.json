@@ -3,18 +3,18 @@
     "Resources": {
         "myvpc": {
             "Type": "AWS::EC2::VPC",
-            "Properties" : {
-            "CidrBlock": "192.168.0.0/16",
-            "EnableDnsHostnames": true,
-            "InstanceTenancy": "default",
-            "Tags": [
-                {
-                    "Key": "Name",
-                    "Value": "Mynetwork"
-                }
-            ]
-        }
-    },
+            "Properties": {
+                "CidrBlock": "192.168.0.0/16",
+                "EnableDnsHostnames": true,
+                "InstanceTenancy": "default",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Mynetwork"
+                    }
+                ]
+            }
+        },
         "IGW": {
             "Type": "AWS::EC2::InternetGateway",
             "Properties": {
@@ -104,7 +104,7 @@
                 }
             }
         },
-        "Privatesubnet-1": {
+        "Privatesubnet1": {
             "Type": "AWS::EC2::Subnet",
             "Properties": {
                 "AvailabilityZone": "us-east-1b",
@@ -120,7 +120,7 @@
                 ]
             }
         },
-        "Privatesubnet-2": {
+        "Privatesubnet2": {
             "Type": "AWS::EC2::Subnet",
             "Properties": {
                 "AvailabilityZone": "us-east-1c",
@@ -136,22 +136,22 @@
                 ]
             }
         },
-        "associatetoprivatert-1": {
+        "associatetoprivatert1": {
             "Type": "AWS::EC2::SubnetRouteTableAssociation",
             "Properties": {
                 "SubnetId": {
-                    "Ref": "Privatesubnet-1"
+                    "Ref": "Privatesubnet1"
                 },
                 "RouteTableId": {
                     "Ref": "PrivateRT"
                 }
             }
         },
-        "associatetoprivatert-2": {
+        "associatetoprivatert2": {
             "Type": "AWS::EC2::SubnetRouteTableAssociation",
             "Properties": {
                 "SubnetId": {
-                    "Ref": "Privatesubnet-2"
+                    "Ref": "Privatesubnet2"
                 },
                 "RouteTableId": {
                     "Ref": "PrivateRT"
@@ -171,6 +171,12 @@
                         "FromPort": 22,
                         "ToPort": 22,
                         "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 80,
+                        "ToPort": 80,
+                        "CidrIp": "0.0.0.0/0"
                     }
                 ],
                 "SecurityGroupEgress": [
@@ -181,9 +187,11 @@
                         "CidrIp": "0.0.0.0/0"
                     }
                 ],
-                
-                "Tags":[
-                { "Key": "Name", "Value":  "Openssh" }
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Openssh"
+                    }
                 ]
             }
         },
@@ -210,12 +218,98 @@
                         "CidrIp": "0.0.0.0/0"
                     }
                 ],
-                
-                "Tags":[
-                { "Key": "Name", "Value":  "Openmysql" }
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Openmysql"
+                    }
+                ]
+            }
+        },
+        "Webserver": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "KeyName": "network",
+                "ImageId": "ami-0ac80df6eff0e70b5",
+                "InstanceType": "t2.micro",
+                "Monitoring": "false",
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": true,
+                        "DeviceIndex": "0",
+                        "GroupSet": [
+                            {
+                                "Ref": "opessh"
+                            }
+                        ],
+                        "SubnetId": {
+                            "Ref": "Publicsubnet"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "webserver"
+                    }
+                ],
+                "UserData": {
+                    "Fn::Base64": {
+                        "Fn::Join": [
+                            "\n",
+                            [
+                                "#!/bin/bash",
+                                "sudo apt-get update",
+                                "sudo apt-get install apache2 -y"
+                            ]
+                        ]
+                    }
+                }
+            }
+        },
+        "rdssubnetgroup": {
+            "Type": "AWS::RDS::DBSubnetGroup",
+            "Properties": {
+                "DBSubnetGroupDescription": "for create RDS",
+                "SubnetIds": [
+                    {
+                        "Ref": "Privatesubnet1"
+                    },
+                    {
+                        "Ref": "Privatesubnet2"
+                    }
+                ]
+            }
+        },
+        "rdsDBInstance": {
+            "Type": "AWS::RDS::DBInstance",
+            "Properties": {
+                "AllocatedStorage": "20",
+                "DBInstanceClass": "db.t2.micro",
+                "DBInstanceIdentifier": "myqlweb",
+                "DBName": "goldb",
+                "DBSubnetGroupName": {
+                    "Ref": "rdssubnetgroup"
+                },
+                "Engine": "mysql",
+                "EngineVersion": "5.7",
+                "MasterUsername": "mysqladmin",
+                "MasterUserPassword": "Admin123456",
+                "Port": "3306",
+                "PubliclyAccessible": "true",
+                "StorageType": "gp2",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "MysqlRDS"
+                    }
+                ],
+                "VPCSecurityGroups": [
+                    {
+                        "Ref": "openmysql"
+                    }
                 ]
             }
         }
     }
 }
-
