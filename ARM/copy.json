@@ -1,0 +1,85 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "0.0.0.2",
+    "parameters": {
+        "vnetname": {
+            "type": "string",
+            "metadata": {
+                "description": "This is virtual network name"
+            },
+            "defaultValue": "ntier"
+
+        },
+        "subnetnames": {
+            "type": "array",
+            "metadata": {
+                "description": "Names of the subnets"
+            },
+            "defaultValue": [
+                "ntier/web",
+                "ntier/app",
+                "ntier/db",
+                "ntier/management"
+            ]
+        },
+        "vnetaddress": {
+            "type": "string",
+            "metadata": {
+                "description": "description"
+            },
+            "defaultValue": "192.168.0.0/16",
+            "allowedValues": [
+                "192.168.0.0/16",
+                "10.0.0.0/16",
+                "172.16.0.0/16"
+            ]
+        },
+        "subnetcidranges": {
+            "type": "array",
+            "metadata": {
+                "description": "subnet ranges"
+            },
+            "defaultValue": [
+                "192.168.0.0/24",
+                "192.168.1.0/24",
+                "192.168.2.0/24",
+                "192.168.3.0/24"
+            ]
+        }
+       
+
+    },
+    "resources": [
+        {
+            "name": "[parameters('vnetname')]",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-05-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('vnetaddress')]"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "[parameters('subnetnames')[copyIndex()]]",
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "apiVersion": "2020-05-01",
+            "properties": {
+                "addressPrefix": "[parameters('subnetcidranges')[copyIndex()]]"
+            },
+            "copy": {
+                "name": "subnetcopy",
+                "count": "[length(parameters('subnetcidranges'))]",
+                "mode": "serial"
+            },
+            "dependsOn": [
+                "[parameters('vnetname')]"
+            ]
+        }
+        
+    ]
+
+}

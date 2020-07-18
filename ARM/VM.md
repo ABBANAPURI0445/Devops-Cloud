@@ -25,11 +25,13 @@ Find your local number: https://us02web.zoom.us/u/keixmvlluU
 ## deploy vm in custom network:
    1. Write ARM Template  NIC (network interface Card) 
       dependencies:
-        1. Vnet
-        2. Subnet
+        1. Vnet 
+        2. Subnet -- 4 copy , concat, copyindex , lenght 
         3. Public Ip
         4. Nsg 
+        5. Network interface card  -- NIC 
 
-   2. write ARM template for VM 
+   2. write ARM template for VM  
+   
 
 
