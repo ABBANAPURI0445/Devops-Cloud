@@ -1,0 +1,371 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters" :{
+     "vpccidr": {
+        "Type" : "String",
+        "Default" : "192.168.0.0/16",
+        "AllowedValues" : ["192.168.0.0/16", "10.0.0.0/16", "172.16.0.0/16"],
+        "Description" : "Enter 192.168.0.0/16, 10.0.0.0/16, or172.16.0.0/16 . Default is 192.168.0.0/16."
+ 
+     },
+     "subnet1cidr": {
+        "Type" : "String",
+        "Default" : "192.168.0.0/24"
+     },
+     "subnet2cidr": {
+        "Type" : "String",
+        "Default" : "192.168.1.0/24"
+     },
+     "subnet3cidr": {
+        "Type" : "String",
+        "Default" : "192.168.2.0/24"
+     },
+     "publicsubnetAZ": {
+         "Type": "AWS::EC2::AvailabilityZone::Name",
+         "Default" : "us-east-1a"
+     },
+     "privatesubnet1AZ": {
+        "Type": "AWS::EC2::AvailabilityZone::Name",
+        "Default" : "us-east-1b"
+     },
+     "privatesubnet2AZ": {
+        "Type": "AWS::EC2::AvailabilityZone::Name",
+        "Default" : "us-east-1c"
+     },
+     "subnetchoice": {
+         "Type": "AWS::EC2::Subnet::Id"
+     },
+     "subnetchoice1": {
+        "Type": "AWS::EC2::Subnet::Id"
+    },
+    "subnetchoice2": {
+        "Type": "AWS::EC2::Subnet::Id"
+    }
+    },
+    "Resources": {
+        "myvpc": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+                "CidrBlock": 
+                { "Ref": "vpccidr" }
+                ,
+                "EnableDnsHostnames": true,
+                "InstanceTenancy": "default",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Mynetwork"
+                    }
+                ]
+            }
+        },
+        "IGW": {
+            "Type": "AWS::EC2::InternetGateway",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Internet-gateway"
+                    }
+                ]
+            }
+        },
+        "IGWattachtoVPC": {
+            "Type": "AWS::EC2::VPCGatewayAttachment",
+            "Properties": {
+                "InternetGatewayId": {
+                    "Ref": "IGW"
+                },
+                "VpcId": {
+                    "Ref": "myvpc"
+                }
+            }
+        },
+        "PublicRT": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "myvpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Public-RT"
+                    }
+                ]
+            }
+        },
+        "routetoigw": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "PublicRT"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "IGW"
+                }
+            }
+        },
+        "PrivateRT": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "myvpc"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Private_RT"
+                    }
+                ]
+            }
+        },
+        "Publicsubnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": 
+                { "Ref": "publicsubnetAZ" }
+                ,
+                "VpcId": {
+                    "Ref": "myvpc"
+                },
+                "CidrBlock": 
+                { "Ref": "subnet1cidr" }
+                ,
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Public-subnet"
+                    }
+                ]
+            }
+        },
+        "associatepublicrt": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "Publicsubnet"
+                },
+                "RouteTableId": {
+                    "Ref": "PublicRT"
+                }
+            }
+        },
+        "Privatesubnet1": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": 
+                { "Ref": "privatesubnet1AZ" }
+                ,
+                "VpcId": {
+                    "Ref": "myvpc"
+                },
+                "CidrBlock": 
+                { "Ref": "subnet2cidr" }
+                ,
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Private-Subnet-1"
+                    }
+                ]
+            }
+        },
+        "Privatesubnet2": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": 
+                { "Ref": "privatesubnet2AZ" }
+                ,
+                "VpcId": {
+                    "Ref": "myvpc"
+                },
+                "CidrBlock": 
+                { "Ref": "subnet3cidr" }
+                ,
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Private-Subnet-2"
+                    }
+                ]
+            }
+        },
+        "associatetoprivatert1": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "Privatesubnet1"
+                },
+                "RouteTableId": {
+                    "Ref": "PrivateRT"
+                }
+            }
+        },
+        "associatetoprivatert2": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "Privatesubnet2"
+                },
+                "RouteTableId": {
+                    "Ref": "PrivateRT"
+                }
+            }
+        },
+        "opessh": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Allow http to client host",
+                "VpcId": {
+                    "Ref": "myvpc"
+                },
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 22,
+                        "ToPort": 22,
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 80,
+                        "ToPort": 80,
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "SecurityGroupEgress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 80,
+                        "ToPort": 80,
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Openssh"
+                    }
+                ]
+            }
+        },
+        "openmysql": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Allow http to client host",
+                "VpcId": {
+                    "Ref": "myvpc"
+                },
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 3306,
+                        "ToPort": 3306,
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "SecurityGroupEgress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 80,
+                        "ToPort": 80,
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Openmysql"
+                    }
+                ]
+            }
+        },
+        "Webserver": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "KeyName": "network",
+                "ImageId": "ami-0ac80df6eff0e70b5",
+                "InstanceType": "t2.micro",
+                "Monitoring": "false",
+                "NetworkInterfaces": [
+                    {
+                        "AssociatePublicIpAddress": true,
+                        "DeviceIndex": "0",
+                        "GroupSet": [
+                            {
+                                "Ref": "opessh"
+                            }
+                        ],
+                        "SubnetId": {
+                            "Ref": "subnetchoice"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "webserver"
+                    }
+                ],
+                "UserData": {
+                    "Fn::Base64": {
+                        "Fn::Join": [
+                            "\n",
+                            [
+                                "#!/bin/bash",
+                                "sudo apt-get update",
+                                "sudo apt-get install apache2 -y"
+                            ]
+                        ]
+                    }
+                }
+            }
+        },
+        "rdssubnetgroup": {
+            "Type": "AWS::RDS::DBSubnetGroup",
+            "Properties": {
+                "DBSubnetGroupDescription": "for create RDS",
+                "SubnetIds": [
+                    {
+                        "Ref": "subnetchoice1"
+                    },
+                    {
+                        "Ref": "subnetchoice2"
+                    }
+                ]
+            }
+        },
+        "rdsDBInstance": {
+            "Type": "AWS::RDS::DBInstance",
+            "Properties": {
+                "AllocatedStorage": "20",
+                "DBInstanceClass": "db.t2.micro",
+                "DBInstanceIdentifier": "myqlweb",
+                "DBName": "goldb",
+                "DBSubnetGroupName": {
+                    "Ref": "rdssubnetgroup"
+                },
+                "Engine": "mysql",
+                "EngineVersion": "5.7",
+                "MasterUsername": "mysqladmin",
+                "MasterUserPassword": "Admin123456",
+                "Port": "3306",
+                "PubliclyAccessible": "true",
+                "StorageType": "gp2",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "MysqlRDS"
+                    }
+                ],
+                "VPCSecurityGroups": [
+                    {
+                        "Ref": "openmysql"
+                    }
+                ]
+            }
+        }
+    }
+}
