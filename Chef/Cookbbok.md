@@ -1,5 +1,5 @@
 ## COOKBOOK:
- goto cd ~/chef-repo/cookbboks
+* goto cd ~/chef-repo/cookbboks
     ```
     chef generate cookbook apache2 -b 
     ```
