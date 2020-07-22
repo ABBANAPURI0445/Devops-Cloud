@@ -27,5 +27,6 @@ sudo apt-get install apache2 -y
     ```
     berks upload
     ```
+ 4. if you change anythingincookbook we need to change version in metadata.rb
 
 ![cookbook](cookbook.png)
