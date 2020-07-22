@@ -80,7 +80,14 @@
         "Publicsubnet": {
             "Type": "AWS::EC2::Subnet",
             "Properties": {
-                "AvailabilityZone": "us-east-1a",
+                "AvailabilityZone":  {
+                    "Fn::Select" : [ 
+                      "3", 
+                      { 
+                        "Fn::GetAZs" : { "Ref" : "AWS::Region" }  
+                      } 
+                    ]
+                  },
                 "VpcId": {
                     "Ref": "myvpc"
                 },
