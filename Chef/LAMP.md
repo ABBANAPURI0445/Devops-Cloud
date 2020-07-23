@@ -50,8 +50,8 @@
     end
     ```
 5. repeat 3 step
-6. __nano /var/www/html/info.php__  insert content into this file  '<?php
-phpinfo(); ?>'
+6. __nano /var/www/html/info.php__  insert content into this file  ```<?php
+phpinfo(); ?>```
   1. generate file
      ```
      chef generate file . info.php
