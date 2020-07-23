@@ -41,7 +41,7 @@
         action :install
     end
     ```
-  OR
+    OR
     ```
     ['php','libapache2-mod-php','php-mysql'].each do |packages|
      package packages do
