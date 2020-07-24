@@ -14,7 +14,7 @@
   ---
   ```
 ## Cookbook:
-   1. generate cookbook ```cd ~/chef-repo/cookbooks
+   1. generate cookbook ```cd ~/chef-repo/cookbooks```
       ```
       chef generate cookbook -b LAMP-Centos
       ```
