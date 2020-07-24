@@ -1,6 +1,6 @@
 ## install LAMP on centos using Chef Cookbook: 
 [install LAMP on centos](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-centos-7)
-  * before writeing any automation we need to execute manauly
+  * before writting any automation we need to execute manauly
 ## manual commands:
   ```
   sudo yum install httpd
@@ -53,7 +53,27 @@
                 action :create
          end
          ```
-## bootstrap command:
+## bootstrap command
    ```
    knife bootstrap 172.31.9.255 -U centos -i /home/ubuntu/chef.pem --sudo -N centos-node
    ```
+## cookbook upload to chef server
+   1. we need to install berks (one time activity in cookbook)
+      ```
+      berks install 
+      ```
+   2. upload to chef server 
+      ```
+      berks upload
+      ``` 
+## add to run list 
+   1. goto manage chef 
+   2. click on nodes ,select  node and bottom right hand side you will see runlist
+![add runlist](add%20Run%20list.png)
+![add run list2](add%20runlist.png)
+
+## nodes:
+   * during convergence period execute this cookbook on remote nodes
+   * OR login into node and execute ```sudo chef-client``` 
+## Access static web page
+   ```http://publicIp/info.php```
