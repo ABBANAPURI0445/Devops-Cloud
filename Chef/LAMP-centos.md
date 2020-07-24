@@ -89,7 +89,8 @@
         ![add run list2](add%20runlist.png)
    2. add to run_list using command line from Workstation 
       ```
-      knife node run list add NODENAME "recipe[]"
+      knife node run list add NODENAME "recipe[cookbookname::recipename]"
+      ```
 
        
 
