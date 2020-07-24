@@ -81,10 +81,17 @@
       berks upload
       ``` 
 ## add to run list 
-   1. goto manage chef 
-   2. click on nodes ,select  node and bottom right hand side you will see runlist
-![add runlist](add%20Run%20list.png)
-![add run list2](add%20runlist.png)
+   *  add run_list in two way
+   1. UI from chef manage
+      1. goto manage chef (login into chef manage)
+      2. click on nodes ,select  node and bottom right hand side you will see runlist
+        ![add runlist](add%20Run%20list.png)
+        ![add run list2](add%20runlist.png)
+   2. add to run_list using command line from Workstation 
+      ```
+      knife node run list add NODENAME "recipe[]"
+
+       
 
 ## nodes:
    * during convergence period execute this cookbook on remote nodes
