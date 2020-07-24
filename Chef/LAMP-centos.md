@@ -13,6 +13,20 @@
   <?php phpinfo(); ?>
   ---
   ```
+## Cookbook:
+   1. generate cookbook ```cd ~/chef-repo/cookbooks
+      ```
+      chef generate cookbook -b LAMP-Centos
+      ```
+   2. generate recipe ```cd ~/chef-repo/cookbook/LAMP-centos```
+      ```
+      chef generate recipe . LAMP-centos
+      ```
+      LAMP-Centos.rb copy into LAMP-centos recipe (open file and insert)
+   3. generate file
+      ```
+      chef generate file . info.php
+      ```
 ## commands convert into chef resource:
    1. sudo yum install httpd
       ```
