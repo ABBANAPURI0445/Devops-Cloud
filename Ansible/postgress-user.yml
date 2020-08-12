@@ -1,0 +1,20 @@
+- hosts: all
+   become: yes
+   tasks:
+   - name: create ssisagent user
+     postgresql_user:
+       login_user:
+       login_password: 
+       db: 
+       name: ssisagent
+       password: 
+       expires: "infinity"
+   - name: GRANT ALL PRIVILEGES ON SCHEMA public, ssis , holding
+     postgresql_privs:
+       login_user: 
+       login_password: 
+       db: 
+       privs: ALL
+       type: schema
+       objs: public, ssis, holding
+       role: ssisagent
