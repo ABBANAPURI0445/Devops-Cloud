@@ -1,0 +1,56 @@
+- hosts: all
+  become: yes 
+  tasks: 
+  - name: download repo
+    get_url:
+      url: https://repo.zabbix.com/zabbix/5.0/debian/pool/main/z/zabbix-release/zabbix-release_5.0-1+buster_all.deb
+      dest: /home/user 
+  - name: install package
+    apt:
+      deb: /home/user/zabbix-release_5.0-1+buster_all.deb
+      state: present 
+      update_cache: yes 
+  - name: install zabbix-agent 
+    apt:
+      name: zabbix-agent
+      state: present 
+      update_cache: yes 
+    notify: 
+     - restart zabbix agent
+  - name: modify server entry 
+    replace: 
+      path: /etc/zabbix/zabbix_agentd.conf 
+      regexp: 'Server=127.0.0.1'
+      replace:  'Server=10.19.112.45'
+    notify: 
+     - restart zabbix agent 
+  - name: modify serveractive  entry 
+    replace: 
+      path: /etc/zabbix/zabbix_agentd.conf 
+      regexp: 'ServerActive=127.0.0.1'
+      replace:  'ServerActive=10.19.112.45'
+    notify: 
+     - restart zabbix agent 
+  - name: modify hostname entry entry 
+    lineinfile: 
+      path: /etc/zabbix/zabbix_agentd.conf 
+      regexp: '# HostnameItem=system.hostname'
+      line:  'HostnameItem=system.hostname'
+    notify: 
+     - restart zabbix agent 
+  - name: modify hostname entry entry 
+    lineinfile: 
+      path: /etc/zabbix/zabbix_agentd.conf 
+      regexp: 'Hostname='
+      line:  '# Hostname='
+    notify: 
+     - restart zabbix agent 
+  handlers: 
+  - name: restart zabbix agent 
+    service: 
+      name: zabbix-agent
+      state: restarted 
+      enabled: yes
+
+
+      
