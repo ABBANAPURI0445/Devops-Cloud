@@ -1,4 +1,4 @@
-Pandu Ramdaspally is inviting you to a scheduled Zoom meeting.
+jangam srikanth is inviting you to a scheduled Zoom meeting.
 
 Topic: ARM
 Time: Jul 16, 2020 10:30 AM Mumbai, Kolkata, New Delhi
